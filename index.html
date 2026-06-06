@@ -153,7 +153,7 @@ input,textarea{font-family:'DM Sans',sans-serif;}
 .htab.active{background:var(--bg);color:var(--text);}
 
 /* SCROLL AREA */
-.scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;}
+.scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;height:0;}
 .scroll-area::-webkit-scrollbar{width:4px;}
 .scroll-area::-webkit-scrollbar-track{background:transparent;}
 .scroll-area::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
@@ -352,9 +352,9 @@ input,textarea{font-family:'DM Sans',sans-serif;}
 @media(max-width:600px){.team-panel{width:180px;}}
 
 /* demo page layout */
-#page-demo.active{display:flex;flex-direction:column;height:100vh;overflow:hidden;position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;}
-body.demo-mode nav{display:none;}
-.demo-db-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+#page-demo.active{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+body.demo-mode > nav{display:none !important;}
+.demo-db-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;height:0;}
 </style>
 </head>
 <body>
@@ -552,7 +552,7 @@ function showPage(name){
       // force tabs visible
       const inv=document.getElementById('view-inventory')
       if(inv)inv.style.display='block'
-    }, 80)
+    }, 150)
   } else {
     document.body.classList.remove('demo-mode')
     window.scrollTo(0,0)
