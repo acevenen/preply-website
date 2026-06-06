@@ -487,7 +487,7 @@ body.demo-mode nav{display:none;}
     </div>
     <div class="scroll-area" id="scroll-area">
       <div id="spec-view">
-        <div id="view-inventory"></div>
+        <div id="view-inventory" style="display:block;"></div>
         <div id="view-ingress" style="display:none;"></div>
         <div id="view-shuttling" style="display:none;"></div>
       </div>
@@ -547,7 +547,12 @@ function showPage(name){
   document.getElementById('page-'+name).classList.add('active')
   if(name==='demo'){
     document.body.classList.add('demo-mode')
-    setTimeout(renderAll, 50)
+    setTimeout(()=>{
+      renderAll()
+      // force tabs visible
+      const inv=document.getElementById('view-inventory')
+      if(inv)inv.style.display='block'
+    }, 80)
   } else {
     document.body.classList.remove('demo-mode')
     window.scrollTo(0,0)
@@ -641,6 +646,7 @@ const teamMembers = [
 
 // ── STATE ─────────────────────────────────────────────────────
 const ls = {}, locs = {}, chgs = {}, comments = {}, commentInputs = {}
+const conds = {}, keys = {}, mileVerified = {}, inspected = {}
 let inToday = true
 deliveries.forEach(d => {
   ls[d.id] = {stage: d.id==='d2'?3: d.id==='d3'?1: d.id==='d4'?2: 0, blocked: d.id==='d1', completed: false, flagged: false}
@@ -654,7 +660,6 @@ deliveries.forEach(d => {
   commentInputs[d.id] = ''
 })
 
-const conds = {}, keys = {}, mileVerified = {}, inspected = {}
 let activeTab = 'inventory', isAdv = false, dragId = null, toastTmr = null, undoFn = null
 
 // ── HELPERS ───────────────────────────────────────────────────
@@ -1168,7 +1173,10 @@ function renderAll(){
   }
 }
 
-renderAll()
+// init — if demo page is somehow active on load, render it
+if(document.getElementById('page-demo').classList.contains('active')){
+  renderAll()
+}
 
 </script>
 </body>
