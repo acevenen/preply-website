@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme:light;">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Preply — Your dealership floor, finally organized</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ── FORCE LIGHT MODE ALWAYS ── */
+:root { color-scheme: light !important; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light !important;
+    --bg:#ffffff !important;--bg2:#f5f6f8 !important;--bg3:#eceef2 !important;
+    --border:rgba(0,0,0,0.09) !important;--border2:rgba(0,0,0,0.15) !important;
+    --text:#111 !important;--text2:#666 !important;--text3:#aaa !important;
+    --blue:#2278CC !important;--blue-dim:rgba(34,120,204,0.08) !important;--blue-border:rgba(34,120,204,0.22) !important;
+    --green:#0A8A64 !important;--green-dim:rgba(10,138,100,0.08) !important;
+    --amber:#B86E00 !important;--amber-dim:rgba(184,110,0,0.09) !important;
+    --red:#C93232 !important;--red-dim:rgba(201,50,50,0.08) !important;
+    --purple:#5B3E8F !important;--purple-dim:rgba(91,62,143,0.09) !important;--purple-light:#7B5BB5 !important;
+    --surface:#ffffff !important;--surface2:#f0f2f7 !important;
+    --header:#1A2340 !important;--header2:#243060 !important;
+  }
+  html, body { background: #ffffff !important; color: #111 !important; }
+  input, textarea, select { background: #ffffff !important; color: #111 !important; border-color: rgba(0,0,0,0.15) !important; }
+}
+/* ── MARKETING SITE STYLES ── */
+:root{
+  --bg:#ffffff;--bg2:#f5f6f8;--bg3:#eceef2;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.15);
+  --text:#111;--text2:#666;--text3:#aaa;
+  --blue:#2278CC;--blue-dim:rgba(34,120,204,0.08);--blue-border:rgba(34,120,204,0.22);
+  --green:#0A8A64;--green-dim:rgba(10,138,100,0.08);
+  --amber:#B86E00;--amber-dim:rgba(184,110,0,0.09);
+  --red:#C93232;--red-dim:rgba(201,50,50,0.08);
+  --purple:#5B3E8F;--purple-dim:rgba(91,62,143,0.09);--purple-light:#7B5BB5;
+  --r:10px;--rlg:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+button{font-family:'DM Sans',sans-serif;}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'DM Mono',monospace;font-size:17px;font-weight:500;letter-spacing:-0.5px;}
+.nav-logo span{color:var(--blue);}
+.nav-links{display:flex;align-items:center;gap:2rem;}
+.nav-links a{font-size:13px;color:var(--text2);transition:color .2s;cursor:pointer;}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{background:var(--blue);color:#fff!important;padding:8px 18px;border-radius:var(--r);font-size:13px;font-weight:500;transition:opacity .2s;}
+.nav-cta:hover{opacity:.85;}
+.hero{padding:7rem 2rem 5rem;max-width:860px;margin:0 auto;text-align:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--green-dim);border:1px solid rgba(10,138,100,.2);border-radius:999px;padding:5px 16px;font-size:12px;color:var(--green);margin-bottom:2rem;font-family:'DM Mono',monospace;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:600;line-height:1.1;letter-spacing:-2px;margin-bottom:1.5rem;}
+.hero h1 em{font-style:normal;color:var(--blue);}
+.hero p{font-size:17px;color:var(--text2);max-width:520px;margin:0 auto 2.5rem;line-height:1.7;}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-primary{background:var(--blue);color:#fff;padding:13px 28px;border-radius:var(--r);font-size:14px;font-weight:500;border:none;cursor:pointer;transition:opacity .2s;}
+.btn-primary:hover{opacity:.85;}
+.btn-ghost{background:transparent;color:var(--text2);padding:13px 28px;border-radius:var(--r);font-size:14px;border:1px solid var(--border2);cursor:pointer;transition:all .2s;}
+.btn-ghost:hover{color:var(--text);background:var(--bg2);}
+.browser{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);overflow:hidden;max-width:900px;margin:3rem auto;}
+.browser-bar{background:var(--bg3);padding:10px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);}
+.mdot{width:10px;height:10px;border-radius:50%;}
+.mdot-r{background:#ff5f57;}.mdot-y{background:#ffbd2e;}.mdot-g{background:#28ca41;}
+.browser-url{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);margin-left:8px;}
+hr.dv{border:none;border-top:1px solid var(--border);max-width:900px;margin:0 auto;}
+.section{padding:5rem 2rem;max-width:900px;margin:0 auto;}
+.stag{font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;}
+.section h2{font-size:clamp(26px,4vw,38px);font-weight:600;letter-spacing:-1px;margin-bottom:1rem;line-height:1.2;}
+.section p.sub{font-size:16px;color:var(--text2);max-width:520px;line-height:1.7;}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;}
+.pcol{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rlg);padding:1.5rem;}
+.pcol h3{font-size:12px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.pcol.bef h3{color:var(--red);}.pcol.aft h3{color:var(--green);}
+.pitem{font-size:13px;color:var(--text2);padding:9px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;line-height:1.5;}
+.pitem:last-child{border-bottom:none;padding-bottom:0;}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:2.5rem;}
+.feat{background:#fff;border:1px solid var(--border);border-radius:var(--rlg);padding:1.5rem;transition:border-color .2s;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.feat:hover{border-color:var(--blue-border);}
+.feat-icon{width:36px;height:36px;background:var(--blue-dim);border-radius:var(--r);display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:.75rem;}
+.feat h3{font-size:14px;font-weight:600;margin-bottom:5px;}
+.feat p{font-size:13px;color:var(--text2);line-height:1.6;}
+.prcgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:2.5rem;}
+.prccard{background:#fff;border:1px solid var(--border);border-radius:var(--rlg);padding:1.75rem;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.prccard.hot{border-color:var(--blue);border-width:2px;}
+.prcbadge{font-size:10px;font-family:'DM Mono',monospace;background:var(--blue-dim);color:var(--blue);padding:3px 10px;border-radius:999px;display:inline-block;margin-bottom:1rem;border:1px solid var(--blue-border);}
+.prcname{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.5rem;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;}
+.prcamt{font-size:36px;font-weight:600;letter-spacing:-1.5px;margin:.5rem 0 .25rem;}
+.prcamt sup{font-size:18px;font-weight:400;}
+.prcamt sub{font-size:14px;font-weight:400;color:var(--text2);}
+.prcdesc{font-size:12px;color:var(--text2);margin-bottom:1.5rem;line-height:1.5;}
+.prcfts{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:1.75rem;}
+.prcfts li{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px;}
+.prcfts li::before{content:'✓';color:var(--green);flex-shrink:0;}
+.prcbtn{width:100%;padding:11px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text);transition:all .2s;}
+.prcbtn:hover{background:var(--bg2);}
+.prccard.hot .prcbtn{background:var(--blue);color:#fff;border-color:var(--blue);}
+.prccard.hot .prcbtn:hover{opacity:.85;}
+.wlsect{text-align:center;padding:4rem 2rem;border-top:1px solid var(--border);}
+.wlsect h2{font-size:clamp(24px,4vw,36px);font-weight:600;letter-spacing:-1px;margin-bottom:.75rem;}
+.wlsect p{font-size:15px;color:var(--text2);margin-bottom:2rem;}
+.wlinput{background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:12px 16px;color:var(--text);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;width:260px;transition:border-color .2s;}
+.wlinput:focus{border-color:var(--blue);}
+footer{border-top:1px solid var(--border);padding:1.75rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.ftlogo{font-family:'DM Mono',monospace;font-size:14px;}
+.ftlogo span{color:var(--blue);}
+footer p{font-size:12px;color:var(--text3);}
+.ftlinks{display:flex;gap:1.5rem;}
+.ftlinks a{font-size:12px;color:var(--text3);transition:color .2s;cursor:pointer;}
+.ftlinks a:hover{color:var(--text2);}
+.page{display:none;}.page.active{display:block;}
+/* demo page resets body for dashboard */
+#page-demo.active{background:#F4F6FA;}
+@keyframes fup{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{animation:fup .45s ease both;}
+.hero>*:nth-child(1){animation-delay:.05s}.hero>*:nth-child(2){animation-delay:.1s}.hero>*:nth-child(3){animation-delay:.15s}.hero>*:nth-child(4){animation-delay:.2s}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr;}.nav-links a:not(.nav-cta){display:none;}}
+
+/* ── DASHBOARD STYLES ── */
+
+:root{
+  --bg:#F4F6FA;--surface:#FFFFFF;--surface2:#F0F2F7;--border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.13);
+  --text:#0F1117;--text2:#5A6070;--text3:#9BA3B2;
+  --blue:#1A6FD4;--blue2:#1560BB;--blue-dim:rgba(26,111,212,0.09);--blue-border:rgba(26,111,212,0.22);
+  --green:#0A8050;--green-dim:rgba(10,128,80,0.09);--green-bright:#0A8050;
+  --amber:#A05F00;--amber-dim:rgba(160,95,0,0.09);
+  --red:#B02030;--red-dim:rgba(176,32,48,0.09);
+  --header:#1A2340;--header2:#243060;
+  --r:10px;--rlg:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+button{font-family:'DM Sans',sans-serif;cursor:pointer;}
+input,textarea{font-family:'DM Sans',sans-serif;}
+
+/* HEADER */
+.header{background:var(--header);padding:0 16px;flex-shrink:0;}
+.header-top{display:flex;align-items:center;gap:10px;padding:12px 0 10px;}
+.header-logo{width:28px;height:28px;border-radius:7px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;font-family:'DM Mono',monospace;}
+.header-name{font-size:15px;font-weight:600;color:#fff;flex:1;}
+.header-channel{font-size:11px;color:rgba(255,255,255,.45);background:rgba(255,255,255,.08);padding:3px 10px;border-radius:20px;}
+.mode-toggle{background:rgba(255,255,255,.1);border:none;border-radius:20px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,.75);transition:background .15s;}
+.mode-toggle:hover{background:rgba(255,255,255,.18);}
+.header-tabs{display:flex;gap:3px;padding-bottom:0;}
+.htab{flex:1;padding:9px 0;border-radius:8px 8px 0 0;font-size:13px;font-weight:600;border:none;background:transparent;color:rgba(255,255,255,.45);transition:all .15s;}
+.htab.active{background:var(--bg);color:var(--text);}
+
+/* SCROLL AREA */
+.scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0;}
+.scroll-area::-webkit-scrollbar{width:4px;}
+.scroll-area::-webkit-scrollbar-track{background:transparent;}
+.scroll-area::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+
+/* CONTENT */
+.content{max-width:520px;margin:0 auto;padding:16px 14px 100px;}
+
+/* GREETING */
+.greeting-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px;}
+.greeting-title{font-size:19px;font-weight:600;color:var(--text);}
+.greeting-sub{font-size:12px;color:var(--text3);margin-top:3px;}
+.status-pill{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;font-size:12px;font-weight:600;border:1px solid;cursor:pointer;transition:all .15s;flex-shrink:0;}
+.status-in{background:var(--green-dim);border-color:rgba(10,128,80,.25);color:var(--green-bright);}
+.status-out{background:var(--surface2);border-color:var(--border2);color:var(--text3);}
+.status-dot{width:7px;height:7px;border-radius:50%;}
+
+/* DELIVERY CARD */
+.dcard{background:var(--surface);border-radius:var(--rlg);margin-bottom:14px;border:1px solid var(--border);border-left:3px solid var(--blue);position:relative;box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;}
+.dcard.blocked{border-left-color:var(--red);}
+.dcard.rfd{border-left-color:var(--green);}
+.dcard.completed-card{opacity:.6;}
+
+/* CARD HEAD */
+.ch{padding:12px 14px 10px;border-bottom:1px solid var(--surface2);}
+.ch-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.cv{font-size:15px;font-weight:600;color:var(--text);}
+.cc{font-size:12px;color:var(--text2);margin-top:2px;}
+.type-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;flex-shrink:0;}
+.type-onsite{background:rgba(160,95,0,.1);color:var(--amber);}
+.type-carpool{background:var(--blue-dim);color:var(--blue);}
+.type-offsite{background:var(--surface2);color:var(--text2);}
+.ch-pills{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap;align-items:center;}
+.cpill{display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid var(--border2);background:var(--surface2);color:var(--text2);transition:all .15s;}
+.cpill:hover{border-color:var(--blue-border);color:var(--blue);}
+.cpill-hi{background:var(--green-dim);border-color:rgba(10,128,80,.2);color:var(--green-bright);}
+.cpill-mid{background:var(--amber-dim);border-color:rgba(160,95,0,.2);color:var(--amber);}
+.cpill-lo{background:var(--red-dim);border-color:rgba(176,32,48,.2);color:var(--red);}
+.cpill-assign{background:var(--surface2);border-color:var(--border);color:var(--text3);cursor:default;}
+
+/* STAGE PROGRESS */
+.stage-section{padding:14px 14px 12px;border-bottom:1px solid var(--surface2);}
+.stage-header{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;}
+.stage-track{display:flex;align-items:flex-start;}
+.stage-item{display:flex;align-items:flex-start;flex:1;}
+.stage-item:last-child{flex:0;}
+.stage-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;}
+.stage-bubble{width:42px;height:42px;border-radius:50%;border:2.5px solid;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;transition:all .25s;cursor:pointer;background:transparent;letter-spacing:.03em;}
+.stage-bubble:hover{transform:scale(1.05);}
+.stage-line{flex:1;height:2.5px;margin-top:20px;margin-left:2px;margin-right:2px;border-radius:2px;transition:background .25s;min-width:6px;}
+.stage-label{font-size:10px;font-weight:600;text-align:center;line-height:1.3;max-width:54px;transition:color .25s;}
+
+/* STAGE STATES */
+.sb-done{border-color:var(--green)!important;background:var(--green)!important;color:#fff!important;}
+.sb-active{border-color:var(--blue)!important;background:var(--blue-dim)!important;color:var(--blue)!important;box-shadow:0 0 0 3px rgba(26,111,212,.12);}
+.sb-active-rfd{border-color:var(--green)!important;background:var(--green-dim)!important;color:var(--green)!important;box-shadow:0 0 0 3px rgba(10,128,80,.12);}
+.sb-blocked{border-color:var(--red)!important;background:var(--red-dim)!important;color:var(--red)!important;box-shadow:0 0 0 3px rgba(176,32,48,.12);}
+.sb-idle{border-color:var(--border2)!important;background:var(--surface2)!important;color:var(--text3)!important;}
+.sl-done{color:var(--green)!important;}
+.sl-active{color:var(--blue)!important;}
+.sl-active-rfd{color:var(--green)!important;}
+.sl-blocked{color:var(--red)!important;}
+.sl-idle{color:var(--text3)!important;}
+.line-done{background:var(--green)!important;}
+.line-idle{background:var(--surface2)!important;}
+
+/* BANNERS */
+.banner-section{padding:10px 14px 4px;}
+.banner{border-radius:8px;padding:10px 12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.banner-blocked{background:var(--red-dim);border:1px solid rgba(176,32,48,.2);}
+.banner-note{background:rgba(160,95,0,.07);border:1px solid rgba(160,95,0,.18);}
+.banner-text{font-size:12px;font-weight:600;}
+.banner-text-blocked{color:var(--red);}
+.banner-text-note{color:var(--amber);}
+.unblock-btn{font-size:11px;font-weight:600;color:var(--text2);background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:4px 11px;}
+
+/* ACTIONS */
+.card-actions{padding:10px 14px;display:flex;gap:8px;}
+.btn-complete{flex:1;padding:12px 0;border-radius:9px;font-size:14px;font-weight:600;border:none;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s;}
+.btn-complete:hover{background:var(--blue2);}
+.btn-flag{width:46px;height:46px;border-radius:9px;font-size:18px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border2);background:var(--surface2);transition:all .15s;}
+.btn-flag:hover{border-color:var(--red);background:var(--red-dim);}
+.btn-flag.flagged{background:var(--red-dim);border-color:var(--red);}
+
+/* THREAD */
+.thread-section{padding:10px 14px 14px;border-top:1px solid var(--surface2);}
+.thread-header{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;}
+.thread-msg{display:flex;gap:8px;margin-bottom:10px;}
+.thread-avatar{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.thread-name{font-size:13px;font-weight:600;color:var(--text);}
+.thread-time{font-size:11px;color:var(--text3);margin-left:6px;}
+.thread-body{font-size:13px;color:var(--text2);margin-top:2px;line-height:1.4;}
+.thread-input-row{display:flex;gap:8px;align-items:center;margin-top:8px;}
+.thread-input{flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:13px;color:var(--text);outline:none;transition:border-color .15s;}
+.thread-input:focus{border-color:var(--blue-border);}
+.thread-post{font-size:13px;font-weight:600;color:var(--blue);background:none;border:none;padding:6px 4px;}
+
+/* COMPLETE OVERLAY */
+.complete-overlay{position:absolute;inset:0;background:rgba(255,255,255,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border-radius:var(--rlg);backdrop-filter:blur(4px);}
+.complete-badge{background:var(--green-dim);border:1px solid rgba(10,128,80,.2);border-radius:9px;padding:12px 24px;font-size:14px;font-weight:600;color:var(--green);}
+.undo-btn{font-size:12px;font-weight:600;color:var(--text2);background:none;border:1px solid var(--border2);border-radius:20px;padding:6px 16px;}
+
+/* INGRESS */
+.ing-card{background:var(--surface);border-radius:var(--rlg);margin-bottom:14px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;}
+.ing-card.inbounded{border-left:3px solid var(--green);}
+.ing-card.awaiting{border-left:3px solid var(--amber);}
+.ing-section{padding:12px 14px;border-bottom:1px solid var(--surface2);}
+.ing-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+.ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;}
+.ing-field label{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;}
+.ing-field p{font-size:13px;color:var(--text);font-weight:500;margin-top:2px;}
+.photo-row{display:flex;gap:8px;flex-wrap:wrap;}
+.pslot{width:54px;height:54px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
+.pslot-done{background:var(--green-dim);border:1px solid rgba(10,128,80,.2);font-size:16px;color:var(--green);}
+.pslot-empty{background:var(--surface2);border:1px dashed var(--border2);font-size:20px;color:var(--text3);}
+.pslot-empty:hover{background:var(--bg);}
+
+/* SHUTTLE */
+.shuttle-card{background:var(--surface);border-radius:var(--rlg);margin-bottom:14px;border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.05);overflow:hidden;}
+.shuttle-progress{display:flex;align-items:flex-start;padding:14px;}
+.shuttle-step{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
+.shuttle-bubble{width:38px;height:38px;border-radius:50%;border:2.5px solid;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .2s;}
+.shuttle-line{flex:1;height:2.5px;margin-top:18px;margin-left:2px;margin-right:2px;border-radius:2px;transition:background .2s;min-width:12px;}
+.shuttle-lbl{font-size:10px;font-weight:600;text-align:center;}
+
+/* ADVISOR */
+.adv-layout{display:flex;height:100%;min-height:0;}
+.adv-main{flex:1;overflow-y:auto;padding:16px 12px 40px 16px;min-width:0;}
+.adv-main::-webkit-scrollbar{width:4px;}
+.adv-main::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+.adv-heading{font-size:17px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.adv-sub{font-size:12px;color:var(--text3);margin-bottom:14px;}
+.auto-btn{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;border:none;background:var(--blue);color:#fff;transition:opacity .15s;}
+.auto-btn:hover{opacity:.85;}
+.role-zone{background:var(--surface);border-radius:var(--rlg);border:1px solid var(--border);overflow:hidden;margin-bottom:10px;transition:all .15s;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.role-zone.drag-over{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-dim);}
+.role-head{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--surface2);}
+.role-chips{padding:10px 12px 8px;min-height:56px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;}
+.mchip{display:inline-flex;align-items:center;gap:7px;border-radius:8px;padding:6px 10px;cursor:grab;border:1px solid;font-size:13px;font-weight:500;transition:opacity .15s;user-select:none;}
+.mchip:active{cursor:grabbing;opacity:.7;}
+.chip-avatar{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.drop-hint{color:var(--text3);font-size:12px;padding:8px 4px;font-style:italic;}
+.role-tasklist{border-top:1px solid var(--surface2);}
+.rtl-head{padding:7px 14px;display:flex;justify-content:space-between;align-items:center;background:var(--surface2);}
+.rtl-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.rtl-count{font-size:11px;color:var(--text2);background:var(--bg);padding:2px 8px;border-radius:20px;}
+.task-item{padding:9px 12px;border-top:1px solid var(--surface2);}
+.task-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.task-pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.task-name{flex:1;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.task-meta{display:flex;gap:10px;flex-wrap:wrap;}
+.task-meta span{font-size:11px;color:var(--text2);}
+.mini-track{display:flex;margin-top:5px;}
+.mini-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.mini-line{flex:1;height:1.5px;}
+
+/* TEAM PANEL */
+.team-panel{width:214px;flex-shrink:0;border-left:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;}
+.team-panel-head{padding:12px 14px 8px;border-bottom:1px solid var(--surface2);flex-shrink:0;}
+.team-scroll{flex:1;overflow-y:auto;padding:4px 8px 12px;}
+.team-scroll::-webkit-scrollbar{width:3px;}
+.team-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.tsec{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;padding:8px 4px 5px;}
+.tmrow{display:flex;align-items:center;gap:8px;padding:7px 6px;border-radius:8px;cursor:grab;transition:background .15s;user-select:none;}
+.tmrow:hover{background:var(--surface2);}
+.tmrow:active{cursor:grabbing;}
+.tav{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.tonline{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+
+/* BOTTOM NAV */
+.bottom-nav{background:var(--header);border-top:1px solid rgba(255,255,255,.08);display:flex;flex-shrink:0;}
+.bnav-btn{flex:1;padding:10px 0 9px;background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.bnav-lbl{font-size:10px;font-weight:600;color:rgba(255,255,255,.4);text-transform:capitalize;transition:color .15s;}
+.bnav-btn.active .bnav-lbl{color:#fff;}
+
+/* SHEET */
+.sheet-ov{position:fixed;inset:0;z-index:200;display:none;align-items:flex-end;}
+.sheet-ov.open{display:flex;}
+.sheet-back{position:absolute;inset:0;background:rgba(0,0,0,.35);}
+.sheet-box{position:relative;background:var(--surface);border-radius:18px 18px 0 0;width:100%;max-height:75vh;overflow-y:auto;padding-bottom:24px;}
+.sheet-hd{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--surface2);position:sticky;top:0;background:var(--surface);}
+.sheet-title-txt{font-size:16px;font-weight:600;color:var(--text);}
+.sheet-done{font-size:14px;font-weight:600;color:var(--blue);background:none;border:none;padding:6px 10px;}
+.sheet-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--surface2);width:100%;text-align:left;background:none;border-left:none;border-right:none;border-top:none;transition:background .15s;}
+.sheet-row:hover,.sheet-row.sel{background:var(--blue-dim);}
+.sheet-row-emoji{font-size:22px;width:32px;text-align:center;flex-shrink:0;}
+.sheet-row-label{font-size:15px;color:var(--text);font-weight:500;flex:1;}
+.chg-grid{padding:20px;display:flex;flex-wrap:wrap;gap:12px;}
+.chg-btn{padding:13px 20px;border-radius:20px;font-size:16px;font-weight:700;border:1px solid var(--border2);background:transparent;min-height:50px;min-width:70px;transition:all .15s;}
+
+/* TOAST */
+.toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--header);color:#fff;border-radius:10px;padding:10px 16px;font-size:13px;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:90vw;display:none;animation:tup .2s ease;display:none;align-items:center;gap:12px;}
+.toast-msg{white-space:nowrap;}
+.toast-undo{font-size:12px;font-weight:700;color:#7DB8F7;background:none;border:none;cursor:pointer;padding:0;white-space:nowrap;flex-shrink:0;}
+@keyframes tup{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+@media(max-width:600px){.team-panel{width:180px;}}
+
+/* demo page layout */
+#page-demo.active{display:flex;flex-direction:column;height:100vh;overflow:hidden;position:fixed;top:0;left:0;right:0;bottom:0;z-index:50;}
+body.demo-mode nav{display:none;}
+.demo-db-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo" onclick="showPage('home')" style="cursor:pointer;">prep<span>ly</span></div>
+  <div class="nav-links">
+    <a onclick="showPage('home')">product</a>
+    <a onclick="showPage('home')">pricing</a>
+    <a class="nav-cta" onclick="showPage('contact')">request demo</a>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-badge"><span class="badge-dot"></span>already live at a Bay Area auto startup</div>
+    <h1>your dealership floor,<br><em>finally running right</em></h1>
+    <p>Preply puts every task, every vehicle, and every team member on one screen. Your crew walks in, logs on, and knows exactly what to do. No chasing, no guessing, no dropped balls.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('demo')">see live demo</button>
+      <button class="btn-ghost" onclick="showPage('contact')">request access</button>
+    </div>
+  </div>
+  <div class="browser" style="margin:2rem auto 0;">
+    <div class="browser-bar"><div class="mdot mdot-r"></div><div class="mdot mdot-y"></div><div class="mdot mdot-g"></div><span class="browser-url">app.mypreply.com/dashboard</span></div>
+    <div style="padding:1.25rem;background:#fff;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div style="font-size:13px;font-weight:600;font-family:'DM Mono',monospace;">preply — operations</div>
+        <div style="display:flex;gap:4px;">
+          <span style="font-size:11px;padding:4px 12px;border-radius:8px;background:var(--blue);color:#fff;font-weight:500;">inventory</span>
+          <span style="font-size:11px;padding:4px 12px;border-radius:8px;background:var(--bg2);color:var(--text2);border:1px solid var(--border);">ingress</span>
+          <span style="font-size:11px;padding:4px 12px;border-radius:8px;background:var(--bg2);color:var(--text2);border:1px solid var(--border);">shuttling</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px;"><div style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:4px;">vehicles today</div><div style="font-size:22px;font-weight:600;">24</div></div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px;"><div style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:4px;">ready for delivery</div><div style="font-size:22px;font-weight:600;color:var(--green);">8</div></div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:12px;"><div style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;text-transform:uppercase;margin-bottom:4px;">needs attention</div><div style="font-size:22px;font-weight:600;color:var(--amber);">3</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;">2024 Ford F-150 — ••••9201</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">Spec A · HQ → Detail</div></div><div style="display:flex;gap:6px;"><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--green-dim);color:var(--green);border:1px solid rgba(10,138,100,.2);font-weight:600;">RFD</span><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--green-dim);color:var(--green);font-weight:600;">⛽ 82%</span></div></div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;">2023 Honda CR-V — ••••4892</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">Spec B · EA Charging</div></div><div style="display:flex;gap:6px;"><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-border);font-weight:600;">PREP</span><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--amber-dim);color:var(--amber);font-weight:600;">43%</span></div></div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;font-weight:600;font-family:'DM Mono',monospace;">2024 Kia EV9 — ••••3310</div><div style="font-size:11px;color:var(--text2);margin-top:2px;">Spec C · Morris Lot</div></div><div style="display:flex;gap:6px;"><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--amber-dim);color:var(--amber);border:1px solid rgba(184,110,0,.2);font-weight:600;">RFS</span><span style="font-size:10px;padding:3px 8px;border-radius:999px;background:var(--green-dim);color:var(--green);font-weight:600;">65%</span></div></div>
+      </div>
+    </div>
+  </div>
+  <hr class="dv" style="margin-top:4rem;"/>
+  <div class="section">
+    <div class="stag">the problem</div>
+    <h2>your floor is losing time<br>every single day</h2>
+    <p class="sub">When your ops run on word of mouth and group texts, you're already behind. Tasks fall through the cracks, nobody has the full picture, and managers are always playing catch-up.</p>
+    <div class="pgrid">
+      <div class="pcol bef"><h3><span>✕</span> without preply</h3>
+        <div class="pitem"><span>→</span>Starting the day waiting to find out what you're doing</div>
+        <div class="pitem"><span>→</span>Status updates that live in someone's head</div>
+        <div class="pitem"><span>→</span>Managers with no real-time view of the floor</div>
+        <div class="pitem"><span>→</span>Vehicle stages tracked by memory or whiteboard</div>
+      </div>
+      <div class="pcol aft"><h3><span>✓</span> with preply</h3>
+        <div class="pitem"><span>→</span>Every task assigned and visible the second you log in</div>
+        <div class="pitem"><span>→</span>One tap to update — no texts, no calls, no confusion</div>
+        <div class="pitem"><span>→</span>Managers see everything live, all at once</div>
+        <div class="pitem"><span>→</span>Built-in prep pipeline from request to delivery</div>
+      </div>
+    </div>
+  </div>
+  <hr class="dv"/>
+  <div class="section">
+    <div class="stag">features</div>
+    <h2>built by someone<br>who works the floor</h2>
+    <p class="sub">Not built by a software team that read about dealerships. Built by someone who lived it.</p>
+    <div class="fgrid">
+      <div class="feat"><div class="feat-icon">⚡</div><h3>role-based views</h3><p>Inventory, ingress, and shuttling each get their own screen. Everyone sees exactly what's theirs — nothing else cluttering it up.</p></div>
+      <div class="feat"><div class="feat-icon">📡</div><h3>live floor feed</h3><p>Every status change, vehicle move, and task update logged in real time. Nothing slips through.</p></div>
+      <div class="feat"><div class="feat-icon">👁</div><h3>manager view</h3><p>One screen that shows every vehicle, every specialist, and where everything stands. No more walkie-talkie check-ins.</p></div>
+      <div class="feat"><div class="feat-icon">🔋</div><h3>fuel &amp; charge tracking</h3><p>Color-coded fuel and charge levels for every vehicle on your lot. Works for gas, hybrid, and EV.</p></div>
+      <div class="feat"><div class="feat-icon">🚗</div><h3>vehicle pipeline</h3><p>From request to ready — every vehicle tracked through every stage with a single tap. The whiteboard is dead.</p></div>
+      <div class="feat"><div class="feat-icon">🔌</div><h3>plugs into what you have</h3><p>Connects to Google Sheets and your DMS. Works alongside what you already use — no rip-and-replace, no retraining.</p></div>
+    </div>
+  </div>
+  <hr class="dv"/>
+  <div class="section">
+    <div class="stag">pricing</div>
+    <h2>one price,<br>one location</h2>
+    <p class="sub">Flat rate per location. Your whole team, no per-seat surprises.</p>
+    <div class="prcgrid">
+      <div class="prccard"><div class="prcname">starter</div><div class="prcamt"><sup>$</sup>299<sub>/mo</sub></div><div class="prcdesc">One location. Get your floor running right from day one.</div><ul class="prcfts"><li>Up to 15 team members</li><li>All 3 role tabs</li><li>Advisor dashboard</li><li>Email support</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
+      <div class="prccard hot"><div class="prcbadge">most popular</div><div class="prcname">pro</div><div class="prcamt"><sup>$</sup>499<sub>/mo</sub></div><div class="prcdesc">Unlimited team, deeper integrations, built to scale with you.</div><ul class="prcfts"><li>Unlimited team members</li><li>Everything in starter</li><li>Slack + Google Sheets sync</li><li>Custom pipeline stages</li><li>Priority support</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
+      <div class="prccard"><div class="prcname">pro + AI</div><div class="prcamt"><sup>$</sup>799<sub>/mo</sub></div><div class="prcdesc">Everything in Pro — plus an AI co-pilot that tells your team what to do next.</div><ul class="prcfts"><li>Everything in Pro</li><li>Priority queue AI</li><li>Blocker detection + alerts</li><li>Natural language updates</li><li>End of day ops report</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
+    </div>
+  </div>
+  <div class="wlsect">
+    <h2>ready to actually run your floor?</h2>
+    <p>Drop your email. We're onboarding a small number of dealerships to start.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+      <input class="wlinput" type="email" id="wl-email" placeholder="your work email"/>
+      <button class="btn-primary" onclick="submitWL()">join waitlist</button>
+    </div>
+    <p id="wl-msg" style="display:none;margin-top:1rem;color:var(--green);font-size:14px;font-family:'DM Mono',monospace;">you're on the list — we'll be in touch.</p>
+  </div>
+  <footer>
+    <div class="ftlogo">prep<span>ly</span></div>
+    <div class="ftlinks"><a onclick="showPage('home')">product</a><a onclick="showPage('demo')">demo</a><a href="mailto:hello@mypreply.com">hello@mypreply.com</a></div>
+    <p>© 2026 Preply. built for the floor.</p>
+  </footer>
+</div>
+
+<!-- DEMO PAGE -->
+<div id="page-demo" class="page">
+  <div style="background:#1A2340;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;" onclick="showPage('home')">
+      <span style="font-family:'DM Mono',monospace;font-size:14px;color:rgba(255,255,255,.5);">← mypreply.com</span>
+    </div>
+    <button class="btn-primary" style="padding:7px 16px;font-size:13px;" onclick="showPage('contact')">request access</button>
+  </div>
+  <div class="demo-db-wrap">
+    <div class="header">
+      <div class="header-top">
+        <div class="header-logo">T</div>
+        <span class="header-name">Metro Motors</span>
+        <span id="hchannel" class="header-channel"># vehicle-prep</span>
+        <button class="mode-toggle" id="mode-btn" onclick="toggleMode()">📊 Team View</button>
+      </div>
+      <div class="header-tabs" id="htabs">
+        <button class="htab active" id="htab-inventory" onclick="switchTab(this,'inventory')">🚗 Vehicle Prep</button>
+        <button class="htab" id="htab-ingress" onclick="switchTab(this,'ingress')">🚛 Ingress</button>
+        <button class="htab" id="htab-shuttling" onclick="switchTab(this,'shuttling')">🔄 Shuttling</button>
+      </div>
+    </div>
+    <div class="scroll-area" id="scroll-area">
+      <div id="spec-view">
+        <div id="view-inventory"></div>
+        <div id="view-ingress" style="display:none;"></div>
+        <div id="view-shuttling" style="display:none;"></div>
+      </div>
+      <div id="adv-view" style="display:none;"></div>
+    </div>
+    <div class="bottom-nav" id="bottom-nav">
+      <button class="bnav-btn active" id="bnav-inventory" onclick="switchTab(document.getElementById('htab-inventory'),'inventory')"><span style="font-size:20px;">📦</span><span class="bnav-lbl">vehicle prep</span></button>
+      <button class="bnav-btn" id="bnav-ingress" onclick="switchTab(document.getElementById('htab-ingress'),'ingress')"><span style="font-size:20px;">🚛</span><span class="bnav-lbl">ingress</span></button>
+      <button class="bnav-btn" id="bnav-shuttling" onclick="switchTab(document.getElementById('htab-shuttling'),'shuttling')"><span style="font-size:20px;">🔄</span><span class="bnav-lbl">shuttling</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="page-contact" class="page">
+  <div style="max-width:580px;margin:0 auto;padding:4rem 2rem;">
+    <div class="stag">contact</div>
+    <h2 style="font-size:clamp(26px,4vw,36px);font-weight:600;letter-spacing:-1px;margin-bottom:.75rem;">let's get your floor running right</h2>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:2rem;line-height:1.7;">Fill this out and we'll reach back within 24 hours with a demo link. Or hit us at <a href="mailto:hello@mypreply.com" style="color:var(--blue);">hello@mypreply.com</a></p>
+    <div id="cform" style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">first name</label><input id="cfn" type="text" placeholder="Alex" style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border2)'"/></div>
+        <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">last name</label><input id="cln" type="text" placeholder="Rivera" style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border2)'"/></div>
+      </div>
+      <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">work email</label><input id="cem" type="email" placeholder="alex@dealership.com" style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border2)'"/></div>
+      <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">dealership name</label><input id="cco" type="text" placeholder="Metro Motors" style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border2)'"/></div>
+      <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">team size</label><select id="csz" style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text2);outline:none;appearance:none;cursor:pointer;"><option value="" disabled selected>select team size</option><option>1–5</option><option>6–15</option><option>16–30</option><option>30+</option></select></div>
+      <div><label style="font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-family:'DM Mono',monospace;">message (optional)</label><textarea id="cmsg" placeholder="Tell us about your current ops setup..." style="width:100%;background:#fff;border:1px solid var(--border2);border-radius:var(--r);padding:11px 13px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;resize:vertical;min-height:100px;" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--border2)'"></textarea></div>
+      <button onclick="submitContact()" style="background:var(--blue);color:#fff;padding:13px;border-radius:var(--r);font-size:14px;font-weight:500;border:none;cursor:pointer;">send message</button>
+    </div>
+    <div id="form-ok" style="display:none;text-align:center;padding:2rem;background:var(--green-dim);border:1px solid rgba(10,138,100,.2);border-radius:var(--rlg);color:var(--green);font-size:15px;">✓ message received — we'll be in touch within 24 hours.</div>
+  </div>
+  <footer style="margin-top:2rem;">
+    <div class="ftlogo">prep<span>ly</span></div>
+    <div class="ftlinks"><a onclick="showPage('home')">home</a><a href="mailto:hello@mypreply.com">hello@mypreply.com</a></div>
+    <p>© 2026 Preply.</p>
+  </footer>
+</div>
+
+<!-- SHEET (for dashboard) -->
+<div id="sheet" class="sheet-ov" onclick="closeSheet()">
+  <div class="sheet-back"></div>
+  <div class="sheet-box" onclick="event.stopPropagation()">
+    <div class="sheet-hd">
+      <span id="sheet-title" class="sheet-title-txt"></span>
+      <button class="sheet-done" onclick="closeSheet()">Done</button>
+    </div>
+    <div id="sheet-body"></div>
+  </div>
+</div>
+<div id="toast" class="toast"><span class="toast-msg" id="toast-msg"></span><button class="toast-undo" id="toast-undo" style="display:none;" onclick="doUndo()">Undo</button></div>
+
+<script>
+// ── PAGE ROUTING ──────────────────────────────────────────────
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+  document.getElementById('page-'+name).classList.add('active')
+  if(name==='demo'){
+    document.body.classList.add('demo-mode')
+    setTimeout(renderAll, 50)
+  } else {
+    document.body.classList.remove('demo-mode')
+    window.scrollTo(0,0)
+  }
+}
+function submitWL(){
+  const e=document.getElementById('wl-email')
+  if(!e.value||!e.value.includes('@')){e.style.borderColor='#C93232';return}
+  e.style.display='none'
+  document.querySelector('[onclick="submitWL()"]').style.display='none'
+  document.getElementById('wl-msg').style.display='block'
+}
+async function submitContact(){
+  const fn=document.getElementById('cfn').value,em=document.getElementById('cem').value,co=document.getElementById('cco').value
+  if(!fn||!em||!co){alert('Please fill in name, email, and dealership name.');return}
+  const btn=document.querySelector('[onclick="submitContact()"]')
+  btn.textContent='Sending...';btn.disabled=true
+  try {
+    const res = await fetch('https://formspree.io/f/YOUR_FORM_ID',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        firstName:fn,
+        lastName:document.getElementById('cln').value,
+        email:em,
+        dealership:co,
+        teamSize:document.getElementById('csz').value,
+        message:document.getElementById('cmsg').value,
+        _subject:'Preply Demo Request — '+co,
+      })
+    })
+    if(res.ok){
+      document.getElementById('cform').style.display='none'
+      document.getElementById('form-ok').style.display='block'
+    } else {
+      throw new Error('failed')
+    }
+  } catch(e){
+    // fallback to mailto if Formspree not set up yet
+    const sub=encodeURIComponent('Preply Demo Request — '+co)
+    const body=encodeURIComponent('Name: '+fn+' '+document.getElementById('cln').value+'\nEmail: '+em+'\nDealership: '+co+'\nTeam size: '+document.getElementById('csz').value+'\n\nMessage:\n'+(document.getElementById('cmsg').value||''))
+    window.location.href='mailto:hello@mypreply.com?subject='+sub+'&body='+body
+    document.getElementById('cform').style.display='none'
+    document.getElementById('form-ok').style.display='block'
+  }
+}
+
+// ── DASHBOARD JS ──────────────────────────────────────────────
+
+// ── DATA ──────────────────────────────────────────────────────
+const STAGES = ['REQ','RFS','PREP','RFD']
+const SLABELS = ['Requested','Ready for Sale','Prepped','Ready for Delivery']
+const LOCS = [
+  {label:'HQ',emoji:'🏢'},{label:'Lot B',emoji:'🅿️'},
+  {label:'EA — Charging',emoji:'⚡'},{label:'OTW to EA',emoji:'🚗'},
+  {label:'OTW to Detail',emoji:'🚗'},{label:'Staged at Detail',emoji:'✨'},
+  {label:'In line — Car Wash',emoji:'🚿'},{label:'At Car Wash',emoji:'🫧'},
+  {label:'OTW to HQ',emoji:'🚗'},
+]
+const CHARGES = [15,25,50,80,100]
+const RC = {inventory:'#7B5BB5',ingress:'#1A8BBF',shuttling:'#1A9B6A'}
+const RBG = {inventory:'rgba(123,91,181,.12)',ingress:'rgba(26,139,191,.12)',shuttling:'rgba(26,155,106,.12)'}
+const RICONS = {inventory:'📦',ingress:'🚛',shuttling:'🔄'}
+
+const deliveries = [
+  {id:'d1',vin:'5YJ001',vehicle:'2022 Tesla Model 3',customer:'R. Johnson',type:'ON-SITE',eta:'In person now',blocker:'Fuel/charge issue — station unavailable',note:'Confirm accessories + second key'},
+  {id:'d2',vin:'7PD002',vehicle:'2024 Ford F-150',customer:'S. Patel',type:'ON-SITE',eta:'Sat 11am',blocker:'',note:''},
+  {id:'d3',vin:'1FT003',vehicle:'2023 Honda CR-V',customer:'M. Chen',type:'CARPOOL',eta:'Today 2pm',blocker:'',note:''},
+  {id:'d4',vin:'KM8004',vehicle:'2024 Kia EV9',customer:'T. Williams',type:'OFFSITE',eta:'Mon 10am',blocker:'',note:'White glove requested'},
+]
+const ingressItems = [
+  {id:'i1',vin:'PN027059',status:'awaiting',inspector:'Spec A',miles:12450,extColor:'Silver',intColor:'Black',keys:2,charge:45,charger:'Yes',lights:'None',damage:'',photos:0},
+  {id:'i2',vin:'SF052182',status:'awaiting',inspector:'Spec B',miles:8230,extColor:'White',intColor:'Gray',keys:1,charge:80,charger:'Yes',lights:'None',damage:'Minor scratch rear bumper',photos:3},
+  {id:'i3',vin:'RN044461',status:'inbounded',inspector:'Spec C',miles:5120,extColor:'Blue',intColor:'Black',keys:2,charge:65,charger:'Yes',lights:'None',damage:'',photos:7},
+]
+const shuttleTrips = [
+  {id:'s1',vehicle:'2023 Rivian R1T',vin:'PN027059',from:'HQ',to:'Roberts Tires',type:'drop-off',status:'en-route',assignedTo:'Spec A'},
+  {id:'s2',vehicle:'2022 Hyundai Ioniq 5',vin:'NF475840',from:'Service Ctr',to:'HQ',type:'pickup',status:'pending',assignedTo:'Spec B'},
+  {id:'s3',vehicle:'2024 Kia EV9',vin:'R6021953',from:'HQ',to:'AGN',type:'both',status:'pending',assignedTo:'Spec C'},
+]
+const teamMembers = [
+  {id:'t1',initials:'S1',name:'Specialist 1',color:'#1A8BBF',bg:'#0E3A52',role:'ingress',in:true},
+  {id:'t2',initials:'S2',name:'Specialist 2',color:'#7B5BB5',bg:'#2E1A52',role:'inventory',in:true},
+  {id:'t3',initials:'S3',name:'Specialist 3',color:'#1A9B6A',bg:'#0A3828',role:'shuttling',in:true},
+  {id:'t4',initials:'S4',name:'Specialist 4',color:'#D4A017',bg:'#3A2A08',role:'shuttling',in:true},
+  {id:'t5',initials:'S5',name:'Specialist 5',color:'#D47A17',bg:'#3A2208',role:'inventory',in:true},
+  {id:'t6',initials:'S6',name:'Specialist 6',color:'#7B5BB5',bg:'#2E1A52',role:'ingress',in:true},
+  {id:'t7',initials:'S7',name:'Specialist 7',color:'#1A8BBF',bg:'#0E3A52',role:'inventory',in:true},
+  {id:'t8',initials:'S8',name:'Specialist 8',color:'#888',bg:'#2A2A2A',role:'inventory',in:false},
+]
+
+// ── STATE ─────────────────────────────────────────────────────
+const ls = {}, locs = {}, chgs = {}, comments = {}, commentInputs = {}
+let inToday = true
+deliveries.forEach(d => {
+  ls[d.id] = {stage: d.id==='d2'?3: d.id==='d3'?1: d.id==='d4'?2: 0, blocked: d.id==='d1', completed: false, flagged: false}
+  locs[d.id] = d.id==='d1'?'In line — Car Wash': d.id==='d2'?'HQ': d.id==='d3'?'Lot B': 'EA — Charging'
+  chgs[d.id] = d.id==='d1'?25: d.id==='d2'?80: d.id==='d3'?50: 35
+  conds[d.id] = d.id==='d1'?'Needs Wash': d.id==='d2'?'Clean': d.id==='d3'?'Needs Detail': 'Clean'
+  keys[d.id] = d.id==='d3'?1: 2
+  mileVerified[d.id] = d.id==='d2'?true: false
+  inspected[d.id] = d.id==='d2'?true: d.id==='d4'?true: false
+  comments[d.id] = d.id==='d1'?[{av:'S1',name:'Specialist 1',color:'#1A8BBF',bg:'#0E3A52',text:'Key on my desk, vehicle at HQ charging. Handle ASAP.',time:'3:08 PM'}]:[]
+  commentInputs[d.id] = ''
+})
+
+const conds = {}, keys = {}, mileVerified = {}, inspected = {}
+let activeTab = 'inventory', isAdv = false, dragId = null, toastTmr = null, undoFn = null
+
+// ── HELPERS ───────────────────────────────────────────────────
+function chgColor(n){return n<40?'var(--red)':n<70?'var(--amber)':'var(--green)'}
+function chgPillClass(n){return n<40?'cpill-lo':n<70?'cpill-mid':'cpill-hi'}
+
+function getBubbleClass(state, idx){
+  if(idx < state.stage) return 'sb-done'
+  if(idx === state.stage){
+    if(state.blocked) return 'sb-blocked'
+    if(idx === 3) return 'sb-active-rfd'
+    return 'sb-active'
+  }
+  return 'sb-idle'
+}
+function getLabelClass(state, idx){
+  if(idx < state.stage) return 'sl-done'
+  if(idx === state.stage){
+    if(state.blocked) return 'sl-blocked'
+    if(idx === 3) return 'sl-active-rfd'
+    return 'sl-active'
+  }
+  return 'sl-idle'
+}
+function getLineClass(state, idx){return idx < state.stage ? 'line-done' : 'line-idle'}
+
+function showToast(msg, undoCallback){
+  const t = document.getElementById('toast')
+  const tm = document.getElementById('toast-msg')
+  const tu = document.getElementById('toast-undo')
+  tm.textContent = msg
+  undoFn = undoCallback || null
+  tu.style.display = undoCallback ? 'inline' : 'none'
+  t.style.display = 'flex'
+  if(toastTmr) clearTimeout(toastTmr)
+  toastTmr = setTimeout(() => { t.style.display = 'none'; undoFn = null }, 4500)
+}
+function doUndo(){
+  if(undoFn){ undoFn(); undoFn = null }
+  document.getElementById('toast').style.display = 'none'
+  if(toastTmr) clearTimeout(toastTmr)
+}
+function closeSheet(){document.getElementById('sheet').classList.remove('open')}
+function openSheet(type, id){
+  if(type==='cond'){
+    document.getElementById('sheet-title').textContent = 'Vehicle condition'
+    const opts = ['Clean','Needs Detail','Needs Wash','At Detail','At Car Wash']
+    const icons = ['✨','🧽','🫧','✨','🫧']
+    document.getElementById('sheet-body').innerHTML = opts.map((o,i)=>`<button class="sheet-row${conds[id]===o?' sel':''}" onclick="pickCond('${id}','${o}')"><span class="sheet-row-emoji">${icons[i]}</span><span class="sheet-row-label">${o}</span>${conds[id]===o?'<span style="color:var(--green);font-size:18px;">✓</span>':''}</button>`).join('')
+    document.getElementById('sheet').classList.add('open'); return
+  }
+  if(type==='keys'){
+    document.getElementById('sheet-title').textContent = 'Keys present'
+    const opts = [0,1,2,'Valet']
+    document.getElementById('sheet-body').innerHTML = '<div class="chg-grid">'+opts.map(k=>`<button onclick="pickKeys('${id}',${JSON.stringify(k)})" style="padding:14px 20px;border-radius:20px;font-size:16px;font-weight:700;border:1px solid ${keys[id]===k?'var(--blue)':'var(--border2)'};background:${keys[id]===k?'var(--blue-dim)':'transparent'};color:${keys[id]===k?'var(--blue)':'var(--text)'};min-height:50px;min-width:70px;cursor:pointer;">${k===0?'None':k+' 🔑'+(typeof k==='number'&&k>1?'':'')} ${typeof k==='string'?'🅿️':''}</button>`).join('')+'</div>'
+    document.getElementById('sheet').classList.add('open'); return
+  }
+  
+  document.getElementById('sheet-title').textContent = type==='loc'?'Update location':'Update charge level'
+  const body = document.getElementById('sheet-body')
+  if(type === 'loc'){
+    body.innerHTML = LOCS.map(l => `<button class="sheet-row${locs[id]===l.label?' sel':''}" onclick="pickLoc('${id}','${l.label}')"><span class="sheet-row-emoji">${l.emoji}</span><span class="sheet-row-label">${l.label}</span>${locs[id]===l.label?'<span style="color:var(--green);font-size:18px;">✓</span>':''}</button>`).join('')
+  } else {
+    body.innerHTML = `<div class="chg-grid">${CHARGES.map(p => `<button class="chg-btn" style="color:${chgColor(p)};border-color:${chgs[id]===p?chgColor(p):'var(--border2)'};" onclick="pickChg('${id}',${p})">${p}%</button>`).join('')}</div>`
+  }
+  document.getElementById('sheet').classList.add('open')
+}
+function pickLoc(id, l){
+  const prev = locs[id]; locs[id]=l; closeSheet()
+  showToast('📍 '+l, ()=>{ locs[id]=prev; renderAll() }); renderAll()
+}
+function pickChg(id, p){
+  const prev = chgs[id]; chgs[id]=p; closeSheet()
+  showToast('⚡ '+p+'%', ()=>{ chgs[id]=prev; renderAll() }); renderAll()
+}
+
+function setStage(id, i){
+  const prev = {...ls[id]}; ls[id].stage=i; ls[id].blocked=false
+  showToast('Stage → '+SLABELS[i], ()=>{ ls[id]=prev; renderAll() }); renderAll()
+}
+function completeCard(id, label){ls[id].completed=true; showToast('✅ '+label+' — advisor notified'); renderAll()}
+function undoComplete(id){ls[id].completed=false; showToast('↩ Marked incomplete'); renderAll()}
+function toggleFlag(id){
+  const prev = ls[id].flagged; ls[id].flagged=!prev
+  showToast(prev?'Flag removed':'🚩 Flagged — ops notified', ()=>{ ls[id].flagged=prev; renderAll() }); renderAll()
+}
+function unblock(id){
+  const prev = {...ls[id]}; ls[id].blocked=false
+  showToast('✅ Unblocked', ()=>{ ls[id]=prev; renderAll() }); renderAll()
+}
+function toggleInToday(){
+  inToday = !inToday
+  showToast(inToday?'✅ Marked in today':'Marked off today'); renderAll()
+}
+function prefillHelp(id){
+  const el = document.getElementById('ci-'+id)
+  if(el){ el.value='🚨 Need help — '; el.focus() }
+}
+function markInbounded(id){const i=ingressItems.find(x=>x.id===id);if(i)i.status='inbounded'; showToast('✅ Inbounded — passed to techs'); renderAll()}
+function addPhoto(id){const i=ingressItems.find(x=>x.id===id);if(i&&i.photos<7)i.photos++; showToast('📷 Photo added'); renderAll()}
+function advanceShuttle(id){
+  const t=shuttleTrips.find(x=>x.id===id); if(!t) return
+  const ss=['pending','en-route','complete']; const idx=ss.indexOf(t.status)
+  if(idx<2){
+    const prev=t.status; t.status=ss[idx+1]
+    showToast('Stage → '+['Pending','En Route','Complete'][idx+1], ()=>{ t.status=prev; renderAll() }); renderAll()
+  }
+}
+function postComment(id){
+  const val = document.getElementById('ci-'+id)?.value?.trim(); if(!val) return
+  const time = new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'})
+  comments[id].push({av:'ME',name:'You',color:'var(--blue)',bg:'#0E2E52',text:val,time})
+  renderAll()
+  setTimeout(()=>{const el=document.getElementById('ci-'+id);if(el)el.value=''},10)
+}
+
+function pickCond(id, v){
+  const prev=conds[id]; conds[id]=v; closeSheet()
+  showToast('🚗 '+v, ()=>{conds[id]=prev;renderAll()}); renderAll()
+}
+function pickKeys(id, v){
+  const prev=keys[id]; keys[id]=v; closeSheet()
+  showToast('🔑 Keys: '+v, ()=>{keys[id]=prev;renderAll()}); renderAll()
+}
+function toggleMileVerified(id){
+  const prev=mileVerified[id]; mileVerified[id]=!prev
+  showToast(mileVerified[id]?'✓ Mileage verified':'Mileage unverified', ()=>{mileVerified[id]=prev;renderAll()}); renderAll()
+}
+function toggleInspected(id){
+  const prev=inspected[id]; inspected[id]=!prev
+  showToast(inspected[id]?'✓ Inspection complete':'Inspection cleared', ()=>{inspected[id]=prev;renderAll()}); renderAll()
+}
+
+// ── RENDER INVENTORY ──────────────────────────────────────────
+function renderInventory(){
+  const inToday = true
+  return `<div class="content">
+    <div class="greeting-row">
+      <div>
+        <div class="greeting-title">Good morning 👋</div>
+        <div class="greeting-sub">${deliveries.length} vehicles to prep</div>
+      </div>
+      <div class="status-pill ${inToday?'status-in':'status-out'}" onclick="toggleInToday()">
+        <div class="status-dot" style="background:${inToday?'var(--green)':'var(--text3)'}"></div>
+        ${inToday?'In today':'Off today'}
+      </div>
+    </div>
+    ${deliveries.map(d => {
+      const state = ls[d.id]
+      const loc = locs[d.id]; const chg = chgs[d.id]
+      const locObj = LOCS.find(l=>l.label===loc)||{emoji:'📍'}
+      return `<div class="dcard${state.blocked?' blocked':state.stage===3?' rfd':''}${state.completed?' completed-card':''}">
+        <div class="ch">
+          <div class="ch-top">
+            <div>
+              <div class="cv">${d.vehicle}</div>
+              <div class="cc">${d.customer}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">
+              <span class="type-badge type-${d.type==='ON-SITE'?'onsite':d.type==='CARPOOL'?'carpool':'offsite'}">${d.type}</span>
+              ${d.eta?`<span style="font-size:11px;color:var(--text3);">${d.eta}</span>`:''}
+            </div>
+          </div>
+          <div class="ch-pills">
+            <button class="cpill" onclick="openSheet('loc','${d.id}')">${locObj.emoji} ${loc} <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill ${chgPillClass(chg)}" onclick="openSheet('chg','${d.id}')">⛽ ${chg}% <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill" style="background:${conds[d.id]==='Clean'?'var(--green-dim)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber-dim)':'var(--blue-dim)'};color:${conds[d.id]==='Clean'?'var(--green)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber)':'var(--blue)'};border-color:${conds[d.id]==='Clean'?'rgba(10,128,80,.2)':'rgba(184,110,0,.2)'};" onclick="openSheet('cond','${d.id}')">${conds[d.id]==='Clean'?'✨':conds[d.id]==='Needs Wash'?'🫧':'🧽'} ${conds[d.id]} <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill" style="background:${keys[d.id]===0?'var(--red-dim)':'var(--surface2)'};color:${keys[d.id]===0?'var(--red)':'var(--text2)'};" onclick="openSheet('keys','${d.id}')">🔑 ${keys[d.id]} <span style="font-size:10px;opacity:.5;">▾</span></button>
+          </div>
+          <div style="display:flex;gap:8px;padding:8px 14px 10px;border-top:1px solid var(--surface2);flex-wrap:wrap;">
+            <button onclick="toggleMileVerified('${d.id}')" style="display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid ${mileVerified[d.id]?'rgba(10,128,80,.2)':'var(--border2)'};background:${mileVerified[d.id]?'var(--green-dim)':'var(--surface2)'};color:${mileVerified[d.id]?'var(--green)':'var(--text3)'};">
+              ${mileVerified[d.id]?'✓':'○'} Miles verified
+            </button>
+            <button onclick="toggleInspected('${d.id}')" style="display:flex;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;border:1px solid ${inspected[d.id]?'rgba(10,128,80,.2)':'var(--border2)'};background:${inspected[d.id]?'var(--green-dim)':'var(--surface2)'};color:${inspected[d.id]?'var(--green)':'var(--text3)'};">
+              ${inspected[d.id]?'✓':'○'} Inspection
+            </button>
+            <span class="cpill cpill-assign" style="cursor:default;">👤 Spec A</span>
+          </div>
+        </div>
+        <div class="stage-section">
+          <div class="stage-header">Prep stage — tap to update</div>
+          <div class="stage-track">
+            ${STAGES.map((abbr, i) => {
+              const bc = getBubbleClass(state, i)
+              const lc = getLabelClass(state, i)
+              const isLast = i === STAGES.length - 1
+              return `<div class="stage-item">
+                <div class="stage-step">
+                  <button class="stage-bubble ${bc}" onclick="setStage('${d.id}',${i})">${abbr}</button>
+                  <span class="stage-label ${lc}">${SLABELS[i]}</span>
+                </div>
+                ${isLast?'':'<div class="stage-line '+ getLineClass(state,i) +'"></div>'}
+              </div>`
+            }).join('')}
+          </div>
+        </div>
+        ${(state.blocked||d.note)?`<div class="banner-section">
+          ${state.blocked?`<div class="banner banner-blocked">
+            <span class="banner-text banner-text-blocked">🚫 ${d.blocker||'Blocked'}</span>
+            <button class="unblock-btn" onclick="unblock('${d.id}')">Unblock</button>
+          </div>`:''}
+          ${d.note?`<div class="banner banner-note">
+            <span class="banner-text banner-text-note">💬 ${d.note}</span>
+          </div>`:''}
+        </div>`:''}
+        <div class="card-actions">
+          <button class="btn-complete" onclick="completeCard('${d.id}','${d.vehicle}')">✓ Mark complete</button>
+          <button class="btn-flag${state.flagged?' flagged':''}" onclick="toggleFlag('${d.id}')">🚩</button>
+        </div>
+        <div class="thread-section">
+          <div class="thread-header">Thread</div>
+          ${(comments[d.id]||[]).map(c=>`<div class="thread-msg">
+            <div class="thread-avatar" style="background:${c.bg};color:${c.color};">${c.av}</div>
+            <div><span class="thread-name">${c.name}</span><span class="thread-time">${c.time}</span>
+            <div class="thread-body">${c.text}</div></div>
+          </div>`).join('')}
+          <div class="thread-input-row">
+            <input class="thread-input" id="ci-${d.id}" placeholder="Update the thread…" onkeydown="if(event.key==='Enter')postComment('${d.id}')"/>
+            <button onclick="prefillHelp('${d.id}')" style="font-size:16px;background:none;border:none;cursor:pointer;padding:4px;" title="Flag for help">🚩</button>
+            <button class="thread-post" onclick="postComment('${d.id}')">Post</button>
+          </div>
+        </div>
+        ${state.completed?`<div class="complete-overlay">
+          <div class="complete-badge">✓ Complete — advisor notified</div>
+          <button class="undo-btn" onclick="undoComplete('${d.id}')">↩ Undo</button>
+        </div>`:''}
+      </div>`
+    }).join('')}
+  </div>`
+}
+
+// ── RENDER INGRESS ────────────────────────────────────────────
+function renderIngress(){
+  return `<div class="content">
+    <div class="greeting-title" style="margin-bottom:4px;">Inbound Vehicles</div>
+    <div class="greeting-sub" style="margin-bottom:18px;">${ingressItems.filter(i=>i.status==='awaiting').length} awaiting · ${ingressItems.filter(i=>i.status==='inbounded').length} inbounded</div>
+    ${ingressItems.map(item=>`<div class="ing-card ${item.status}">
+      <div class="ing-section" style="display:flex;justify-content:space-between;align-items:flex-start;">
+        <div>
+          <div style="font-size:13px;font-weight:700;font-family:'DM Mono',monospace;color:var(--text);">VIN ••••${item.vin}</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px;">Inspector: ${item.inspector}</div>
+        </div>
+        <span class="cpill ${item.status==='inbounded'?'cpill-hi':'cpill-mid'}" style="cursor:default;">${item.status==='inbounded'?'Inbounded':'Awaiting'}</span>
+      </div>
+      <div class="ing-section">
+        <div class="ing-label">vehicle details</div>
+        <div class="ing-grid">
+          ${[['Miles',item.miles.toLocaleString()],['Keys',item.keys],['Ext.',item.extColor],['Int.',item.intColor],['Charge',item.charge+'%'],['Charger',item.charger],['Lights',item.lights]].map(([l,v])=>`<div class="ing-field"><label>${l}</label><p>${v}</p></div>`).join('')}
+        </div>
+        <div style="margin-top:12px;">
+          <div class="ing-label">Transport damage</div>
+          <input value="${item.damage||''}" placeholder="None" style="width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;color:var(--text);outline:none;"/>
+        </div>
+      </div>
+      <div class="ing-section">
+        <div class="ing-label">photos — ${item.photos}/5 min</div>
+        <div class="photo-row">
+          ${[...Array(Math.max(item.photos,5))].map((_,i)=>`<div class="pslot ${i<item.photos?'pslot-done':'pslot-empty'}" ${i>=item.photos?`onclick="addPhoto('${item.id}')"`:''}>${i<item.photos?'✓':'＋'}</div>`).join('')}
+        </div>
+      </div>
+      ${item.status==='awaiting'?`<div class="ing-section" style="border-bottom:none;">
+        <button onclick="markInbounded('${item.id}')" style="width:100%;padding:12px;border-radius:9px;font-size:14px;font-weight:600;border:none;background:var(--blue);color:#fff;">🚛 Mark Inbounded</button>
+      </div>`:''}
+    </div>`).join('')}
+  </div>`
+}
+
+// ── RENDER SHUTTLING ──────────────────────────────────────────
+function renderShuttling(){
+  const ss = ['pending','en-route','complete']
+  const sL = ['Pending','En Route','Complete']
+  return `<div class="content">
+    <div class="greeting-title" style="margin-bottom:4px;">Shuttle Trips</div>
+    <div class="greeting-sub" style="margin-bottom:18px;">${shuttleTrips.filter(t=>t.status!=='complete').length} active · ${shuttleTrips.filter(t=>t.status==='complete').length} complete</div>
+    ${shuttleTrips.map(trip=>{
+      const idx = ss.indexOf(trip.status)
+      const tc = {'drop-off':'var(--red)','pickup':'var(--green)','both':'var(--amber)'}[trip.type]||'var(--text3)'
+      const borderColor = trip.status==='complete'?'var(--green)':trip.status==='en-route'?'var(--amber)':'var(--text3)'
+      return `<div class="shuttle-card" style="border-left:3px solid ${borderColor};">
+        <div style="padding:12px 14px;border-bottom:1px solid var(--surface2);">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+            <div>
+              <div style="font-size:15px;font-weight:600;">${trip.vehicle}</div>
+              <div style="font-size:12px;color:var(--text2);margin-top:2px;">••••${trip.vin}</div>
+            </div>
+            <span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;color:${tc};background:${tc}18;border:1px solid ${tc}40;flex-shrink:0;">${trip.type}</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:10px;">
+            <span style="font-size:13px;font-weight:500;background:var(--surface2);padding:5px 10px;border-radius:7px;">${trip.from}</span>
+            <span style="color:var(--text3);font-size:16px;">→</span>
+            <span style="font-size:13px;font-weight:500;color:var(--blue);background:var(--blue-dim);padding:5px 10px;border-radius:7px;">${trip.to}</span>
+          </div>
+        </div>
+        <div class="shuttle-progress">
+          ${ss.map((s,i)=>{
+            const done = i<idx, active = i===idx
+            const col = s==='complete'?'var(--green)':s==='en-route'?'var(--amber)':'var(--text3)'
+            const acol = done?'var(--green)':active?col:'var(--border2)'
+            const abg = done?'var(--green-dim)':active&&s!=='pending'?s==='en-route'?'var(--amber-dim)':'var(--green-dim)':'var(--surface2)'
+            return `<div style="display:flex;align-items:flex-start;${i<2?'flex:1;':''}">
+              <div class="shuttle-step">
+                <div class="shuttle-bubble" style="border-color:${acol};background:${abg};">${done?'✓':i===0?'⏳':i===1?'🚗':'🏁'}</div>
+                <span class="shuttle-lbl" style="color:${done?'var(--green)':active?col:'var(--text3)'};">${sL[i]}</span>
+              </div>
+              ${i<2?`<div class="shuttle-line" style="background:${done?'var(--green)':'var(--surface2)'};"></div>`:''}
+            </div>`
+          }).join('')}
+        </div>
+        ${trip.status!=='complete'?`<div style="padding:10px 14px;display:flex;gap:8px;border-top:1px solid var(--surface2);">
+          <button onclick="advanceShuttle('${trip.id}')" style="flex:1;padding:11px;border-radius:9px;font-size:13px;font-weight:600;border:none;background:${trip.status==='en-route'?'var(--green)':'var(--amber)'};color:#fff;">
+            ${trip.status==='pending'?'🚗 Start trip':'✓ Mark complete'}
+          </button>
+          <button onclick="showToast('🚩 Flagged — ops notified')" style="width:46px;height:46px;border-radius:9px;font-size:18px;border:1px solid var(--border2);background:var(--surface2);display:flex;align-items:center;justify-content:center;">🚩</button>
+        </div>`:''}
+      </div>`
+    }).join('')}
+  </div>`
+}
+
+// ── RENDER ADVISOR ────────────────────────────────────────────
+function renderAdvisor(){
+  const teamIn = teamMembers.filter(m=>m.in)
+  const teamOut = teamMembers.filter(m=>!m.in)
+  const taskCnt = {
+    inventory: deliveries.length,
+    ingress: ingressItems.filter(i=>i.status==='awaiting').length,
+    shuttling: shuttleTrips.filter(t=>t.status!=='complete').length
+  }
+  return `<div class="adv-layout" style="height:calc(100vh - 148px);">
+    <div class="adv-main">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div>
+          <div class="adv-heading">Role Assignment</div>
+          <div class="adv-sub">Drag specialists to assign roles</div>
+        </div>
+        <button class="auto-btn" onclick="autoAssign()">✦ Auto-assign</button>
+      </div>
+      ${['ingress','inventory','shuttling'].map(rk=>{
+        const assigned = teamMembers.filter(m=>m.role===rk&&m.in)
+        return `<div class="role-zone" id="zone-${rk}"
+          ondragover="event.preventDefault();document.getElementById('zone-${rk}').classList.add('drag-over')"
+          ondragleave="document.getElementById('zone-${rk}').classList.remove('drag-over')"
+          ondrop="dropMember('${rk}',event)">
+          <div class="role-head" style="background:${RBG[rk]};">
+            <span style="font-size:18px;">${RICONS[rk]}</span>
+            <div style="flex:1;">
+              <div style="font-size:14px;font-weight:600;color:${RC[rk]};text-transform:capitalize;">${rk}</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:1px;">${taskCnt[rk]} active tasks</div>
+            </div>
+            <span style="font-size:11px;font-weight:500;color:var(--text2);background:var(--surface2);padding:2px 8px;border-radius:20px;">${assigned.length} assigned</span>
+          </div>
+          <div class="role-chips">
+            ${assigned.length===0?'<span class="drop-hint">Drop specialists here</span>':''}
+            ${assigned.map(m=>`<div class="mchip" draggable="true" ondragstart="dragStart('${m.id}')" ondragend="dragEnd()" style="background:${m.bg}22;border-color:${RC[rk]}44;color:var(--text);">
+              <div class="chip-avatar" style="background:${m.bg};color:${m.color};">${m.initials}</div>
+              ${m.name}
+              <span style="font-size:10px;color:var(--text3);">⠿</span>
+            </div>`).join('')}
+          </div>
+          ${rk==='inventory'?`<div class="role-tasklist">
+            <div class="rtl-head">
+              <span class="rtl-label" style="color:${RC.inventory};">🚗 Vehicle Prep</span>
+              <span class="rtl-count">${deliveries.filter(d=>ls[d.id]?.completed).length}/${deliveries.length} done</span>
+            </div>
+            ${deliveries.map(d=>{
+              const state=ls[d.id];const chg=chgs[d.id];const loc=locs[d.id]
+              const sl=state.blocked?'BLOCKED':state.stage===3?'RFD':STAGES[state.stage]
+              const sc=state.blocked?'var(--red)':state.stage===3?'var(--green)':'var(--blue)'
+              const sb=state.blocked?'var(--red-dim)':state.stage===3?'var(--green-dim)':'var(--blue-dim)'
+              return `<div class="task-item" style="opacity:${state.completed?.45:1};">
+                <div class="task-top">
+                  <span class="task-pill" style="color:${sc};background:${sb};">${sl}</span>
+                  <span class="task-name">${d.vehicle}</span>
+                  ${state.completed?'<span style="font-size:11px;color:var(--green);">✓</span>':''}
+                </div>
+                <div class="task-meta">
+                  <span>${d.customer}</span>
+                  <span style="color:${chgColor(chg)};">⚡${chg}%</span>
+                  <span>📍${loc}</span>
+                  ${state.flagged?'<span style="color:var(--red);">🚩</span>':''}
+                </div>
+                <div class="mini-track">
+                  ${STAGES.map((s,i)=>`<div style="display:flex;align-items:center;${i<3?'flex:1;':''}">
+                    <div class="mini-dot" style="background:${i<state.stage?'var(--green)':i===state.stage&&state.blocked?'var(--red)':i===state.stage?'var(--blue)':'var(--surface2)'}"></div>
+                    ${i<3?`<div class="mini-line" style="background:${i<state.stage?'var(--green)':'var(--surface2)'}"></div>`:''}
+                  </div>`).join('')}
+                </div>
+              </div>`
+            }).join('')}
+          </div>`:''}
+          ${rk==='ingress'?`<div class="role-tasklist">
+            <div class="rtl-head">
+              <span class="rtl-label" style="color:${RC.ingress};">🚛 Inbound</span>
+              <span class="rtl-count">${ingressItems.filter(i=>i.status==='inbounded').length}/${ingressItems.length} done</span>
+            </div>
+            ${ingressItems.map(i=>`<div class="task-item" style="opacity:${i.status==='inbounded'?.5:1};">
+              <div class="task-top">
+                <span class="task-pill" style="color:${i.status==='inbounded'?'var(--green)':'var(--amber)'};background:${i.status==='inbounded'?'var(--green-dim)':'var(--amber-dim)'};">${i.status==='inbounded'?'INBOUNDED':'AWAITING'}</span>
+                <span style="font-size:12px;font-family:'DM Mono',monospace;font-weight:600;">••••${i.vin}</span>
+              </div>
+              <div class="task-meta">
+                <span>${i.inspector}</span>
+                <span style="color:${chgColor(i.charge)};">⚡${i.charge}%</span>
+                <span style="color:${i.photos>=5?'var(--green)':'var(--amber)'};">📷${i.photos}/5</span>
+                ${i.damage?`<span style="color:var(--red);">⚠ ${i.damage}</span>`:''}
+              </div>
+            </div>`).join('')}
+          </div>`:''}
+          ${rk==='shuttling'?`<div class="role-tasklist">
+            <div class="rtl-head">
+              <span class="rtl-label" style="color:${RC.shuttling};">🔄 Shuttles</span>
+              <span class="rtl-count">${shuttleTrips.filter(t=>t.status==='complete').length}/${shuttleTrips.length} done</span>
+            </div>
+            ${shuttleTrips.map(t=>`<div class="task-item" style="opacity:${t.status==='complete'?.45:1};">
+              <div class="task-top">
+                <span class="task-pill" style="color:${t.status==='complete'?'var(--green)':t.status==='en-route'?'var(--amber)':'var(--text3)'};background:${t.status==='complete'?'var(--green-dim)':t.status==='en-route'?'var(--amber-dim)':'var(--surface2)'};">${t.status==='complete'?'DONE':t.status==='en-route'?'EN ROUTE':'PENDING'}</span>
+                <span class="task-name">${t.vehicle}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:11px;background:var(--surface2);padding:3px 7px;border-radius:4px;">${t.from}</span>
+                <span style="color:var(--text3);">→</span>
+                <span style="font-size:11px;color:var(--blue);background:var(--blue-dim);padding:3px 7px;border-radius:4px;">${t.to}</span>
+              </div>
+            </div>`).join('')}
+          </div>`:''}
+        </div>`
+      }).join('')}
+    </div>
+    <!-- TEAM PANEL -->
+    <div class="team-panel">
+      <div class="team-panel-head">
+        <div style="font-size:14px;font-weight:600;color:var(--text);">Team</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;">${teamIn.length} in · ${teamOut.length} out</div>
+      </div>
+      <div class="team-scroll">
+        <div class="tsec">In today</div>
+        ${teamIn.map(m=>`<div class="tmrow" draggable="true" ondragstart="dragStart('${m.id}')" ondragend="dragEnd()">
+          <div class="tav" style="background:${m.bg};color:${m.color};">${m.initials}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${m.name}</div>
+            <div style="font-size:10px;font-weight:600;text-transform:capitalize;color:${RC[m.role]};">${m.role}</div>
+          </div>
+          <div class="tonline" style="background:var(--green);"></div>
+        </div>`).join('')}
+        <div style="border-top:1px solid var(--surface2);margin:8px 0 4px;"></div>
+        <div class="tsec">Not in today</div>
+        ${teamOut.map(m=>`<div class="tmrow" style="opacity:.4;cursor:default;">
+          <div class="tav" style="background:#ccc;color:#888;filter:grayscale(1);">${m.initials}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:13px;font-weight:500;color:var(--text2);">${m.name}</div>
+            <div style="font-size:10px;color:var(--text3);">not in today</div>
+          </div>
+          <div class="tonline" style="background:var(--surface2);"></div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`
+}
+
+// ── DRAG & DROP ───────────────────────────────────────────────
+function dragStart(id){dragId=id}
+function dragEnd(){dragId=null; document.querySelectorAll('.role-zone').forEach(z=>z.classList.remove('drag-over'))}
+function dropMember(role, e){
+  e.preventDefault()
+  if(dragId){const m=teamMembers.find(x=>x.id===dragId);if(m){m.role=role;showToast(RICONS[role]+' Assigned to '+role)}}
+  dragId=null; document.querySelectorAll('.role-zone').forEach(z=>z.classList.remove('drag-over'))
+  renderAll()
+}
+function autoAssign(){
+  const roles=['ingress','inventory','shuttling','shuttling','inventory','ingress','inventory','shuttling']
+  teamMembers.filter(m=>m.in).forEach((m,i)=>{m.role=roles[i]||'inventory'})
+  showToast('✦ Auto-assigned '+teamMembers.filter(m=>m.in).length+' specialists')
+  renderAll()
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────
+function switchTab(el, tab){
+  activeTab = tab
+  document.querySelectorAll('.htab').forEach(t=>t.classList.remove('active'))
+  if(el) el.classList.add('active')
+  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'))
+  const nb = document.getElementById('bnav-'+tab); if(nb) nb.classList.add('active')
+  const chs = {inventory:'# vehicle-prep',ingress:'# sf-inbound',shuttling:'# sf-shuttling'}
+  document.getElementById('hchannel').textContent = chs[tab]||''
+  renderAll()
+}
+
+function toggleMode(){
+  isAdv = !isAdv
+  document.getElementById('mode-btn').textContent = isAdv?'👤 My Tasks':'📊 Team View'
+  document.getElementById('htabs').style.display = isAdv?'none':'flex'
+  document.getElementById('bottom-nav').style.display = isAdv?'none':'flex'
+  document.getElementById('spec-view').style.display = isAdv?'none':'block'
+  document.getElementById('adv-view').style.display = isAdv?'block':'none'
+  document.getElementById('hchannel').textContent = isAdv?'# ops-overview':'# vehicle-prep'
+  renderAll()
+  // fix scroll area height for advisor
+  document.getElementById('scroll-area').style.overflowY = isAdv?'hidden':'auto'
+}
+
+function renderAll(){
+  document.getElementById('view-inventory').innerHTML = renderInventory()
+  document.getElementById('view-ingress').innerHTML = renderIngress()
+  document.getElementById('view-shuttling').innerHTML = renderShuttling()
+  document.getElementById('adv-view').innerHTML = renderAdvisor()
+  if(!isAdv){
+    ['inventory','ingress','shuttling'].forEach(t=>{
+      const el = document.getElementById('view-'+t)
+      if(el) el.style.display = activeTab===t?'block':'none'
+    })
+  }
+}
+
+renderAll()
+
+</script>
+</body>
+</html>
