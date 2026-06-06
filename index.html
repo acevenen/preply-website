@@ -646,13 +646,14 @@ const teamMembers = [
 
 // ── STATE ─────────────────────────────────────────────────────
 const ls = {}, locs = {}, chgs = {}, comments = {}, commentInputs = {}
-const conds = {}, keys = {}, mileVerified = {}, inspected = {}
+const conds = {}, keys = {}, mileVerified = {}, inspected = {}, fuelType = {}
 let inToday = true
 deliveries.forEach(d => {
   ls[d.id] = {stage: d.id==='d2'?3: d.id==='d3'?1: d.id==='d4'?2: 0, blocked: d.id==='d1', completed: false, flagged: false}
   locs[d.id] = d.id==='d1'?'Car Wash': d.id==='d2'?'HQ': d.id==='d3'?'Lot B': 'Charging Station'
   chgs[d.id] = d.id==='d1'?25: d.id==='d2'?80: d.id==='d3'?50: 35
   conds[d.id] = d.id==='d1'?'Needs Wash': d.id==='d2'?'Clean': d.id==='d3'?'Needs Detail': 'Clean'
+  fuelType[d.id] = d.id==='d2'?'gas':'electric'
   keys[d.id] = d.id==='d3'?1: 2
   mileVerified[d.id] = d.id==='d2'?true: false
   inspected[d.id] = d.id==='d2'?true: d.id==='d4'?true: false
@@ -776,6 +777,11 @@ function postComment(id){
   setTimeout(()=>{const el=document.getElementById('ci-'+id);if(el)el.value=''},10)
 }
 
+function toggleFuelType(id){
+  fuelType[id] = fuelType[id]==='gas'?'electric':'gas'
+  showToast(fuelType[id]==='gas'?'⛽ Switched to Gas':'⚡ Switched to EV')
+  renderAll()
+}
 function pickCond(id, v){
   const prev=conds[id]; conds[id]=v; closeSheet()
   showToast('🚗 '+v, ()=>{conds[id]=prev;renderAll()}); renderAll()
@@ -826,6 +832,8 @@ function renderInventory(){
           <div class="ch-pills">
             <button class="cpill" onclick="openSheet('loc','${d.id}')">${locObj.emoji} ${loc} <span style="font-size:10px;opacity:.5;">▾</span></button>
             <button class="cpill" style="background:${conds[d.id]==='Clean'?'var(--green-dim)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber-dim)':'var(--blue-dim)'};color:${conds[d.id]==='Clean'?'var(--green)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber)':'var(--blue)'};border-color:${conds[d.id]==='Clean'?'rgba(10,128,80,.2)':'rgba(184,110,0,.2)'};" onclick="openSheet('cond','${d.id}')">${conds[d.id]==='Clean'?'✨':conds[d.id]==='Needs Wash'?'🫧':'🧽'} ${conds[d.id]} <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill ${chgPillClass(chg)}" onclick="openSheet('chg','${d.id}')">${fuelType[d.id]==='gas'?'⛽':'⚡'} ${chg}% <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button onclick="toggleFuelType('${d.id}')" style="display:flex;align-items:center;gap:4px;padding:4px 9px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--border);background:var(--surface2);color:var(--text3);">${fuelType[d.id]==='gas'?'⛽ Gas':'⚡ EV'}</button>
           </div>
           <div style="display:flex;gap:8px;padding:8px 14px 10px;border-top:1px solid var(--surface2);flex-wrap:wrap;">
             <span class="cpill cpill-assign" style="cursor:default;">👤 Spec A</span>
