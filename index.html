@@ -441,11 +441,49 @@ body.demo-mode > nav{display:none !important;}
     <div class="stag">pricing</div>
     <h2>one price,<br>one location</h2>
     <p class="sub">Flat rate per location. Your whole team, no per-seat surprises.</p>
-    <div class="prcgrid">
-      <div class="prccard"><div class="prcname">starter</div><div class="prcamt"><sup>$</sup>299<sub>/mo</sub></div><div class="prcdesc">One location. Get your floor running right from day one.</div><ul class="prcfts"><li>Up to 15 team members</li><li>All 3 role tabs</li><li>Advisor dashboard</li><li>Email support</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
-      <div class="prccard hot"><div class="prcbadge">most popular</div><div class="prcname">pro</div><div class="prcamt"><sup>$</sup>499<sub>/mo</sub></div><div class="prcdesc">Unlimited team, deeper integrations, built to scale with you.</div><ul class="prcfts"><li>Unlimited team members</li><li>Everything in starter</li><li>Slack + Google Sheets sync</li><li>Custom pipeline stages</li><li>Priority support</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
-      <div class="prccard"><div class="prcname">pro + AI</div><div class="prcamt"><sup>$</sup>799<sub>/mo</sub></div><div class="prcdesc">Everything in Pro — plus an AI co-pilot that tells your team what to do next.</div><ul class="prcfts"><li>Everything in Pro</li><li>Priority queue AI</li><li>Blocker detection + alerts</li><li>Natural language updates</li><li>End of day ops report</li></ul><button class="prcbtn" onclick="showPage('contact')">get started</button></div>
+  <!-- FOUNDING MEMBER BANNER -->
+  <div style="background:linear-gradient(135deg,var(--blue-dim),rgba(10,138,100,.06));border:1px solid var(--blue-border);border-radius:var(--rlg);padding:1.25rem 1.5rem;margin-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--blue);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;">⚡ Founding member offer — 5 spots left</div>
+      <div style="font-size:15px;font-weight:600;color:var(--text);">First 5 dealerships lock in Starter at <span style="color:var(--blue);">$199/mo forever</span></div>
+      <div style="font-size:13px;color:var(--text2);margin-top:3px;">2-week onboarding on us. If it doesn't change how your floor runs, you pay nothing.</div>
     </div>
+    <button class="btn-primary" style="flex-shrink:0;" onclick="showPage('contact')">claim your spot →</button>
+  </div>
+  <div style="background:var(--green-dim);border:1px solid rgba(10,138,100,.2);border-radius:var(--rlg);padding:1rem 1.25rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:12px;">
+      <span style="font-size:22px;">🏆</span>
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--green);">Founding Member Rate — First 5 dealerships only</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:2px;">Lock in Starter at <strong>$199/mo forever</strong> — price never increases. 3 spots left.</div>
+      </div>
+    </div>
+    <div class="prcgrid">
+    <div class="prccard">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div class="prcname">starter</div>
+        <span style="font-size:10px;font-weight:600;background:var(--blue-dim);color:var(--blue);padding:2px 8px;border-radius:999px;border:1px solid var(--blue-border);">founding: $199/mo</span>
+      </div>
+      <div class="prcamt"><sup>$</sup>299<sub>/mo after founding</sub></div>
+      <div class="prcdesc">One location. 2-week trial included — no credit card required.</div>
+      <ul class="prcfts"><li>Up to 15 team members</li><li>All 3 role tabs</li><li>Advisor dashboard</li><li>Email support</li><li>2-week free onboarding</li></ul>
+      <button class="prcbtn" onclick="showPage('contact')">start 2-week trial</button>
+    </div>
+    <div class="prccard hot">
+      <div class="prcbadge">most popular</div>
+      <div class="prcname">pro</div>
+      <div class="prcamt"><sup>$</sup>499<sub>/mo</sub></div>
+      <div class="prcdesc">Unlimited team, deeper integrations, built to scale. 2-week trial included.</div>
+      <ul class="prcfts"><li>Unlimited team members</li><li>Everything in starter</li><li>Google Sheets sync</li><li>Custom pipeline stages</li><li>Priority support</li><li>2-week free onboarding</li></ul>
+      <button class="prcbtn" onclick="showPage('contact')">start 2-week trial</button>
+    </div>
+    <div class="prccard">
+      <div class="prcname">pro + AI</div>
+      <div class="prcamt"><sup>$</sup>799<sub>/mo</sub></div>
+      <div class="prcdesc">Everything in Pro — plus an AI co-pilot that tells your team what to do next.</div>
+      <ul class="prcfts"><li>Everything in Pro</li><li>Priority queue AI</li><li>Blocker detection + alerts</li><li>Natural language updates</li><li>End of day ops report</li></ul>
+      <button class="prcbtn" onclick="showPage('contact')">start 2-week trial</button>
+    </div>
+  </div>
   </div>
   <div class="wlsect">
     <h2>ready to actually run your floor?</h2>
@@ -558,9 +596,16 @@ function showPage(name){
     window.scrollTo(0,0)
   }
 }
-function submitWL(){
+async function submitWL(){
   const e=document.getElementById('wl-email')
   if(!e.value||!e.value.includes('@')){e.style.borderColor='#C93232';return}
+  try {
+    await fetch('https://formspree.io/f/xkoaokwn',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:e.value,_subject:'Preply Waitlist — '+e.value,source:'waitlist'})
+    })
+  } catch(err){}
   e.style.display='none'
   document.querySelector('[onclick="submitWL()"]').style.display='none'
   document.getElementById('wl-msg').style.display='block'
