@@ -607,12 +607,14 @@ const STAGES = ['REQ','RFS','PREP','RFD']
 const SLABELS = ['Requested','Ready for Sale','Prepped','Ready for Delivery']
 const LOCS = [
   {label:'HQ',emoji:'🏢'},{label:'Lot B',emoji:'🅿️'},
-  {label:'Charging Station',emoji:'⚡'},{label:'OTW to Charging',emoji:'🚗'},
-  {label:'OTW to Detail',emoji:'🚗'},{label:'Staged at Detail',emoji:'✨'},
-  {label:'Car Wash',emoji:'🚿'},{label:'At Car Wash',emoji:'🫧'},
-  {label:'OTW to HQ',emoji:'🚗'},
+  {label:'Charging Station',emoji:'⚡'},
+  {label:'Staged at Detail',emoji:'✨'},
+  {label:'At Car Wash',emoji:'🫧'},
+  {label:'Service Bay',emoji:'🔧'},
+  {label:'Showroom',emoji:'🏬'},
+  {label:'Ready Line',emoji:'✅'},
 ]
-const CHARGES = [15,25,50,80,100]
+const CHARGES = [10,25,40,65,85,100]
 const RC = {inventory:'#7B5BB5',ingress:'#1A8BBF',shuttling:'#1A9B6A'}
 const RBG = {inventory:'rgba(123,91,181,.12)',ingress:'rgba(26,139,191,.12)',shuttling:'rgba(26,155,106,.12)'}
 const RICONS = {inventory:'📦',ingress:'🚛',shuttling:'🔄'}
@@ -629,9 +631,9 @@ const ingressItems = [
   {id:'i3',vin:'RN044461',status:'inbounded',inspector:'Spec C',miles:5120,extColor:'Blue',intColor:'Black',keys:2,charge:65,charger:'Yes',lights:'None',damage:'',photos:7},
 ]
 const shuttleTrips = [
-  {id:'s1',vehicle:'2023 Rivian R1T',vin:'PN027059',from:'HQ',to:'Roberts Tires',type:'drop-off',status:'en-route',assignedTo:'Spec A'},
+  {id:'s1',vehicle:'2023 Rivian R1T',vin:'PN027059',from:'HQ',to:'Service Center',type:'drop-off',status:'en-route',assignedTo:'Spec A'},
   {id:'s2',vehicle:'2022 Hyundai Ioniq 5',vin:'NF475840',from:'Service Ctr',to:'HQ',type:'pickup',status:'pending',assignedTo:'Spec B'},
-  {id:'s3',vehicle:'2024 Kia EV9',vin:'R6021953',from:'HQ',to:'AGN',type:'both',status:'pending',assignedTo:'Spec C'},
+  {id:'s3',vehicle:'2024 Kia EV9',vin:'R6021953',from:'HQ',to:'HQ',type:'both',status:'pending',assignedTo:'Spec C'},
 ]
 const teamMembers = [
   {id:'t1',initials:'S1',name:'Specialist 1',color:'#1A8BBF',bg:'#0E3A52',role:'ingress',in:true},
@@ -650,9 +652,9 @@ const conds = {}, keys = {}, mileVerified = {}, inspected = {}, fuelType = {}
 let inToday = true
 deliveries.forEach(d => {
   ls[d.id] = {stage: d.id==='d2'?3: d.id==='d3'?1: d.id==='d4'?2: 0, blocked: d.id==='d1', completed: false, flagged: false}
-  locs[d.id] = d.id==='d1'?'Car Wash': d.id==='d2'?'HQ': d.id==='d3'?'Lot B': 'Charging Station'
+  locs[d.id] = d.id==='d1'?'At Car Wash': d.id==='d2'?'HQ': d.id==='d3'?'Lot B': 'Charging Station'
   chgs[d.id] = d.id==='d1'?25: d.id==='d2'?80: d.id==='d3'?50: 35
-  conds[d.id] = d.id==='d1'?'Needs Wash': d.id==='d2'?'Clean': d.id==='d3'?'Needs Detail': 'Clean'
+  conds[d.id] = d.id==='d1'?'Needs Detail': d.id==='d2'?'Clean': d.id==='d3'?'Needs Detail': 'Clean'
   fuelType[d.id] = d.id==='d2'?'gas':'electric'
   keys[d.id] = d.id==='d3'?1: 2
   mileVerified[d.id] = d.id==='d2'?true: false
@@ -665,7 +667,36 @@ let activeTab = 'inventory', isAdv = false, dragId = null, toastTmr = null, undo
 
 // ── HELPERS ───────────────────────────────────────────────────
 function chgColor(n){return n<40?'var(--red)':n<70?'var(--amber)':'var(--green)'}
-function chgPillClass(n){return n<40?'cpill-lo':n<70?'cpill-mid':'cpill-hi'}
+function gasLabel(n){
+  if(n<=0) return 'Empty'
+  if(n<=25) return '1/4 Tank'
+  if(n<=50) return '1/2 Tank'
+  if(n<=75) return '3/4 Tank'
+  return 'Full Tank'
+}
+function evLabel(n){
+  if(n<=15) return '<15%'
+  if(n<=30) return '<30%'
+  if(n<=45) return '<45%'
+  if(n<=80) return '<80%'
+  if(n<100) return '+80%'
+  return '100%'
+}
+function chgPillClass(n){return n<30?'cpill-lo':n<80?'cpill-mid':'cpill-hi'}
+function chgLabel(id, n){
+  if(fuelType[id]==='gas'){
+    if(n<=25) return '¼ Tank'
+    if(n<=50) return '½ Tank'
+    if(n<=75) return '¾ Tank'
+    return 'Full'
+  }
+  if(n<15) return '<15%'
+  if(n<30) return '<30%'
+  if(n<45) return '<45%'
+  if(n<80) return '<80%'
+  if(n<100) return '+80%'
+  return '100%'
+}
 
 function getBubbleClass(state, idx){
   if(idx < state.stage) return 'sb-done'
@@ -707,8 +738,8 @@ function closeSheet(){document.getElementById('sheet').classList.remove('open')}
 function openSheet(type, id){
   if(type==='cond'){
     document.getElementById('sheet-title').textContent = 'Vehicle condition'
-    const opts = ['Clean','Needs Detail','Needs Wash','At Detail','At Car Wash']
-    const icons = ['✨','🧽','🫧','✨','🫧']
+    const opts = ['Clean','Needs Detail']
+    const icons = ['✨','🧽']
     document.getElementById('sheet-body').innerHTML = opts.map((o,i)=>`<button class="sheet-row${conds[id]===o?' sel':''}" onclick="pickCond('${id}','${o}')"><span class="sheet-row-emoji">${icons[i]}</span><span class="sheet-row-label">${o}</span>${conds[id]===o?'<span style="color:var(--green);font-size:18px;">✓</span>':''}</button>`).join('')
     document.getElementById('sheet').classList.add('open'); return
   }
@@ -724,7 +755,9 @@ function openSheet(type, id){
   if(type === 'loc'){
     body.innerHTML = LOCS.map(l => `<button class="sheet-row${locs[id]===l.label?' sel':''}" onclick="pickLoc('${id}','${l.label}')"><span class="sheet-row-emoji">${l.emoji}</span><span class="sheet-row-label">${l.label}</span>${locs[id]===l.label?'<span style="color:var(--green);font-size:18px;">✓</span>':''}</button>`).join('')
   } else {
-    body.innerHTML = `<div class="chg-grid">${CHARGES.map(p => `<button class="chg-btn" style="color:${chgColor(p)};border-color:${chgs[id]===p?chgColor(p):'var(--border2)'};" onclick="pickChg('${id}',${p})">${p}%</button>`).join('')}</div>`
+    const opts = fuelType[id]==='gas'?CHARGES_GAS:CHARGES_EV
+    const labels = fuelType[id]==='gas'?['¼ Tank','½ Tank','¾ Tank','Full']:['<15%','<30%','<45%','<80%','+80%','100%']
+    body.innerHTML = `<div class="chg-grid">${opts.map((p,i) => `<button class="chg-btn" style="color:${chgColor(p)};border-color:${chgs[id]===p?chgColor(p):'var(--border2)'};" onclick="pickChg('${id}',${p})">${labels[i]}</button>`).join('')}</div>`
   }
   document.getElementById('sheet').classList.add('open')
 }
@@ -831,8 +864,8 @@ function renderInventory(){
           </div>
           <div class="ch-pills">
             <button class="cpill" onclick="openSheet('loc','${d.id}')">${locObj.emoji} ${loc} <span style="font-size:10px;opacity:.5;">▾</span></button>
-            <button class="cpill" style="background:${conds[d.id]==='Clean'?'var(--green-dim)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber-dim)':'var(--blue-dim)'};color:${conds[d.id]==='Clean'?'var(--green)':conds[d.id]==='Needs Wash'||conds[d.id]==='Needs Detail'?'var(--amber)':'var(--blue)'};border-color:${conds[d.id]==='Clean'?'rgba(10,128,80,.2)':'rgba(184,110,0,.2)'};" onclick="openSheet('cond','${d.id}')">${conds[d.id]==='Clean'?'✨':conds[d.id]==='Needs Wash'?'🫧':'🧽'} ${conds[d.id]} <span style="font-size:10px;opacity:.5;">▾</span></button>
-            <button class="cpill ${chgPillClass(chg)}" onclick="openSheet('chg','${d.id}')">${fuelType[d.id]==='gas'?'⛽':'⚡'} ${chg}% <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill" style="background:${conds[d.id]==='Clean'?'var(--green-dim)':conds[d.id]==='Needs Detail'?'var(--amber-dim)':'var(--blue-dim)'};color:${conds[d.id]==='Clean'?'var(--green)':conds[d.id]==='Needs Detail'?'var(--amber)':'var(--blue)'};border-color:${conds[d.id]==='Clean'?'rgba(10,128,80,.2)':'rgba(184,110,0,.2)'};" onclick="openSheet('cond','${d.id}')">${conds[d.id]==='Clean'?'✨':'🧽'} ${conds[d.id]} <span style="font-size:10px;opacity:.5;">▾</span></button>
+            <button class="cpill ${chgPillClass(chg)}" onclick="openSheet('chg','${d.id}')">${fuelType[d.id]==='gas'?'⛽ '+gasLabel(chg):'⚡ '+evLabel(chg)} <span style="font-size:10px;opacity:.5;">▾</span></button>
             <button onclick="toggleFuelType('${d.id}')" style="display:flex;align-items:center;gap:4px;padding:4px 9px;border-radius:20px;font-size:11px;font-weight:500;border:1px solid var(--border);background:var(--surface2);color:var(--text3);">${fuelType[d.id]==='gas'?'⛽ Gas':'⚡ EV'}</button>
           </div>
           <div style="display:flex;gap:8px;padding:8px 14px 10px;border-top:1px solid var(--surface2);flex-wrap:wrap;">
